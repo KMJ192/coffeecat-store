@@ -13,6 +13,7 @@ const api: Api = (function () {
       if (response.ok) {
         return await response.json();
       }
+      throw new Error(`http request error : ${response.status}`);
     } catch (e) {
       console.warn(`http request error : ${e}`);
       return null;
