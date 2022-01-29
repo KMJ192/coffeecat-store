@@ -2,7 +2,7 @@
 
 ### 문제 링크
 
-(커피켓 스토어 문제 및 풀이)[https://prgms.tistory.com/113]
+[커피켓 스토어 문제 및 풀이](https://prgms.tistory.com/113)
 
 ### start
 
