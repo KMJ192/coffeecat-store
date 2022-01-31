@@ -10,10 +10,15 @@ const React: React = (function () {
     unmount: undefined,
     callbackResult: undefined,
     focusElement: undefined,
+    prevDOM: undefined,
+    activeNode: null,
   };
 
   const appendNode = (node: HTMLElement, dom?: ReactDOM) => {
-    if (!dom || !dom.tagName) {
+    if (!dom) {
+      return;
+    }
+    if (!dom.tagName && !dom.node) {
       return;
     }
     const {
@@ -24,7 +29,15 @@ const React: React = (function () {
       frontStringNode,
       backStringNode,
     } = dom;
-    const element: HTMLElement = document.createElement(tagName);
+
+    const element: HTMLElement = dom.node
+      ? dom.node
+      : document.createElement(String(tagName));
+
+    // if (dom.node && dom.node.tabIndex === 0) {
+    //   element.tabIndex = 0;
+    // }
+    dom.node = element;
 
     // Setting node property
     if (props) {
@@ -67,16 +80,18 @@ const React: React = (function () {
 
   const createDOM = (
     node: HTMLElement,
-    dom?: ReactDOM[] | ReactDOM | string | null,
+    nextDom?: ReactDOM[] | ReactDOM | string | null,
   ) => {
-    if (dom === undefined || dom === null) return;
-    if (typeof dom === 'string') {
-      node.innerHTML = dom;
+    if (nextDom === undefined || nextDom === null) return;
+
+    if (typeof nextDom === 'string') {
+      node.innerHTML = nextDom;
       return;
     }
 
-    if (Array.isArray(dom)) {
-      dom.forEach((d: ReactDOM | string) => {
+    node.innerHTML = '';
+    if (Array.isArray(nextDom)) {
+      nextDom.forEach((d: ReactDOM | string) => {
         if (typeof d === 'string') {
           console.error('문자열 노드는 배열로 할당할 수 없습니다.');
         } else {
@@ -86,15 +101,18 @@ const React: React = (function () {
       return;
     }
 
-    appendNode(node, dom);
+    appendNode(node, nextDom);
   };
 
   const reactRenderer = debounceFrame(() => {
     const { root, component } = _this;
     if (!root || !component) return;
-    const vDom: ReactDOM[] | ReactDOM | null = component();
-    root.innerHTML = '';
-    createDOM(root as HTMLElement, vDom);
+    const nextDOM: ReactDOM | ReactDOM[] = component();
+    _this.activeNode = document.activeElement;
+
+    createDOM(root as HTMLElement, nextDOM);
+
+    _this.prevDOM = nextDOM;
     _this.stateKey = 0;
   });
 
@@ -143,32 +161,14 @@ const React: React = (function () {
     _this.stateKey++;
   }
 
-  // function useCallback(callback: (arg?: any) => any, depArray?: any[]) {
-  //   const { states, stateKey: currStateKey } = _this;
-  //   const deps = states[currStateKey];
-  //   const hasNoDeps = !depArray;
-  //   const hasChangedDeps: boolean = deps
-  //     ? !depArray?.every((el: any, i: number) => el === deps[i])
-  //     : true;
-  //   if (hasNoDeps || hasChangedDeps || _this.callbackResult !== callback()) {
-  //     _this.callbackResult = callback()();
-  //     states[currStateKey] = depArray;
-  //   }
-  //   _this.stateKey++;
-  // }
-
-  // function useMemo(callback: (arg?: any) => any) {}
-  // function useSuspence() {}
-
   return {
     useState,
     useEffect,
-    useCallback,
     render,
     routeRender,
   };
 })();
 
 export default React;
-export const { useState, useEffect, useCallback } = React;
+export const { useState, useEffect } = React;
 export { ReactDOM };

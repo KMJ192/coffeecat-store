@@ -141,12 +141,13 @@ function ProductInfo({
                               productInfo?.name
                             } ${name} ${priceFormat(price)}원`,
                             childNode: {
-                              tagName: 'input',
+                              node: document.createElement('input'),
                               props: {
                                 type: 'number',
                                 value: quantity,
                                 min: 0,
                                 max: stock,
+                                tabIndex: 0,
                               },
                               event: [
                                 {

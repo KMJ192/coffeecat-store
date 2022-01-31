@@ -41,7 +41,7 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         oneOf: [
           {
-            test: /\.module\.s[ac]ss$/,
+            test: /\.module\.s[ac]ss$/i,
             use: [
               MiniCssExtractPlugin.loader,
               {

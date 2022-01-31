@@ -1,13 +1,13 @@
 import { Api } from './types';
 
 const api: Api = (function () {
-  let serverAddr = '';
+  let globalURL = '';
 
   async function useRequest(
     url: string,
     option: { [key: string]: any } = {},
   ): Promise<any> {
-    const requestUrl = serverAddr ? `${serverAddr}${url}` : url;
+    const requestUrl = globalURL ? `${globalURL}${url}` : url;
     try {
       const response = await fetch(requestUrl, option);
       if (response.ok) {
@@ -18,11 +18,10 @@ const api: Api = (function () {
       console.warn(`http request error : ${e}`);
       return null;
     }
-    return null;
   }
 
   function useGlobalUrl(url: string) {
-    serverAddr = url || '';
+    globalURL = url;
   }
 
   return {

@@ -47,7 +47,7 @@ function ProductInfoContainer() {
         ...selectedProduct,
         ...select,
       };
-      setRecentlySelect(id);
+      setRecentlySelect(productId);
       setSelectedProduct(selected);
 
       total(selected);
