@@ -8,10 +8,10 @@ const React: React = (function () {
     root: null,
     component: null,
     unmount: undefined,
-    callbackResult: undefined,
-    focusElement: undefined,
-    prevDOM: undefined,
-    activeNode: null,
+    injected: {
+      event: () => {},
+      unmount: undefined,
+    },
   };
 
   const appendNode = (node: HTMLElement, dom?: ReactDOM) => {
@@ -29,20 +29,14 @@ const React: React = (function () {
       frontStringNode,
       backStringNode,
     } = dom;
-
     const element: HTMLElement = dom.node
       ? dom.node
       : document.createElement(String(tagName));
 
-    // if (dom.node && dom.node.tabIndex === 0) {
-    //   element.tabIndex = 0;
-    // }
-    dom.node = element;
-
     // Setting node property
     if (props) {
       for (const [key, value] of Object.entries(props)) {
-        (element as HTMLElement)[key] = value;
+        (element as any)[key] = value;
       }
     }
 
@@ -80,18 +74,16 @@ const React: React = (function () {
 
   const createDOM = (
     node: HTMLElement,
-    nextDom?: ReactDOM[] | ReactDOM | string | null,
+    dom?: ReactDOM[] | ReactDOM | string | null,
   ) => {
-    if (nextDom === undefined || nextDom === null) return;
-
-    if (typeof nextDom === 'string') {
-      node.innerHTML = nextDom;
+    if (dom === undefined || dom === null) return;
+    if (typeof dom === 'string') {
+      node.innerHTML = dom;
       return;
     }
 
-    node.innerHTML = '';
-    if (Array.isArray(nextDom)) {
-      nextDom.forEach((d: ReactDOM | string) => {
+    if (Array.isArray(dom)) {
+      dom.forEach((d: ReactDOM | string) => {
         if (typeof d === 'string') {
           console.error('문자열 노드는 배열로 할당할 수 없습니다.');
         } else {
@@ -101,19 +93,17 @@ const React: React = (function () {
       return;
     }
 
-    appendNode(node, nextDom);
+    appendNode(node, dom);
   };
 
   const reactRenderer = debounceFrame(() => {
     const { root, component } = _this;
     if (!root || !component) return;
-    const nextDOM: ReactDOM | ReactDOM[] = component();
-    _this.activeNode = document.activeElement;
-
-    createDOM(root as HTMLElement, nextDOM);
-
-    _this.prevDOM = nextDOM;
+    const vDom: ReactDOM[] | ReactDOM | null = component();
+    root.innerHTML = '';
+    createDOM(root as HTMLElement, vDom);
     _this.stateKey = 0;
+    _this.injected.unmount = _this.injected.event();
   });
 
   function render(component: () => ReactDOM[], rootEle: Element | null) {
@@ -126,6 +116,9 @@ const React: React = (function () {
     _this.states = [];
     if (_this.unmount) {
       _this.unmount();
+    }
+    if (_this.injected.unmount) {
+      _this.injected.unmount();
     }
     reactRenderer();
   }
@@ -145,30 +138,35 @@ const React: React = (function () {
     return [state, setState];
   }
 
-  function useEffect(mountCallback: () => any, depArray?: any[]) {
+  function useEffect(effect: () => any, depsArray?: any[]) {
     const { states, stateKey: currStateKey } = _this;
 
     // 실제로 React는 Deps배열이 없으면 callback함수를 실행시킨다.
-    const hasNoDeps = !depArray;
+    const hasNoDeps = !depsArray;
     const deps = states[currStateKey];
     const hasChangedDeps: boolean = deps
-      ? !depArray?.every((el: any, i: number) => el === deps[i])
+      ? !depsArray?.every((el: any, i: number) => el === deps[i])
       : true;
     if (hasNoDeps || hasChangedDeps) {
-      _this.unmount = mountCallback();
-      states[currStateKey] = depArray;
+      _this.unmount = effect();
+      states[currStateKey] = depsArray;
     }
     _this.stateKey++;
+  }
+
+  function useDocument(event: () => void) {
+    _this.injected.event = event;
   }
 
   return {
     useState,
     useEffect,
+    useDocument,
     render,
     routeRender,
   };
 })();
 
-export default React;
-export const { useState, useEffect } = React;
+export const { useState, useEffect, useDocument } = React;
 export { ReactDOM };
+export default React;
