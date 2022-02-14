@@ -79,4 +79,12 @@ app.get("/product/12", (req, res) => {
   res.send(productOption12);
 });
 
+app.get("/redux-test", (req, res) => {
+  setTimeout(() => {
+    res.send({
+      result: "result",
+    });
+  }, 3000);
+});
+
 app.listen(port);
