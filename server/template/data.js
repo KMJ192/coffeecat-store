@@ -2,73 +2,73 @@ const productList = [
   {
     id: 1,
     name: "커피 컵",
-    imageUrl: "http://localhost:3001/images/cafe_coffee_cup.png",
+    imageUrl: "http://localhost:3002/images/cafe_coffee_cup.png",
     price: 10000,
   },
   {
     id: 2,
     name: "커피컵 종이홀더",
-    imageUrl: "http://localhost:3001/images/coffee_cup_paper_sleeve.png",
+    imageUrl: "http://localhost:3002/images/coffee_cup_paper_sleeve.png",
     price: 1000,
   },
   {
     id: 3,
     name: "커피 머신",
-    imageUrl: "http://localhost:3001/images/coffee_self_service.png",
+    imageUrl: "http://localhost:3002/images/coffee_self_service.png",
     price: 500000,
   },
   {
     id: 4,
     name: "우유 거품기",
-    imageUrl: "http://localhost:3001/images/cooking_milk_foamer.png",
+    imageUrl: "http://localhost:3002/images/cooking_milk_foamer.png",
     price: 20000,
   },
   {
     id: 5,
     name: "우유용 컵",
-    imageUrl: "http://localhost:3001/images/drink_cafe_milk_jag.png",
+    imageUrl: "http://localhost:3002/images/drink_cafe_milk_jag.png",
     price: 10000,
   },
   {
     id: 6,
     name: "그렙 커피",
-    imageUrl: "http://localhost:3001/images/drink_petbottle_coffee.png",
+    imageUrl: "http://localhost:3002/images/drink_petbottle_coffee.png",
     price: 3000,
   },
   {
     id: 7,
     name: "에스프레소 메이커",
-    imageUrl: "http://localhost:3001/images/espresso_maker.png",
+    imageUrl: "http://localhost:3002/images/espresso_maker.png",
     price: 50000,
   },
   {
     id: 8,
     name: "냉동 샌드위치",
-    imageUrl: "http://localhost:3001/images/food_sandwitch.png",
+    imageUrl: "http://localhost:3002/images/food_sandwitch.png",
     price: 10000,
   },
   {
     id: 9,
     name: "티 메이커",
-    imageUrl: "http://localhost:3001/images/press_tea_maker.png",
+    imageUrl: "http://localhost:3002/images/press_tea_maker.png",
     price: 35000,
   },
   {
     id: 10,
     name: "각설탕 묶음",
-    imageUrl: "http://localhost:3001/images/sugar_kakuzatou.png",
+    imageUrl: "http://localhost:3002/images/sugar_kakuzatou.png",
     price: 500,
   },
   {
     id: 11,
     name: "커피 시럽",
-    imageUrl: "http://localhost:3001/images/sweets_milk_cream.png",
+    imageUrl: "http://localhost:3002/images/sweets_milk_cream.png",
     price: 500,
   },
   {
     id: 12,
     name: "에스프레소 머신",
-    imageUrl: "http://localhost:3001/images/espresso_maker_2.png",
+    imageUrl: "http://localhost:3002/images/espresso_maker_2.png",
     price: 300000,
   },
 ];
@@ -77,7 +77,7 @@ const productOption1 = {
   id: 1,
   name: "커피 컵",
   price: 10000,
-  imageUrl: "http://localhost:3001/images/cafe_coffee_cup.png",
+  imageUrl: "http://localhost:3002/images/cafe_coffee_cup.png",
   productOptions: [
     {
       id: 1,
@@ -110,7 +110,7 @@ const productOption2 = {
   id: 2,
   name: "커피컵 종이홀더",
   price: 1000,
-  imageUrl: "http://localhost:3001/images/coffee_cup_paper_sleeve.png",
+  imageUrl: "http://localhost:3002/images/coffee_cup_paper_sleeve.png",
   productOptions: [
     {
       id: 3,
@@ -135,7 +135,7 @@ const productOption3 = {
   id: 3,
   name: "커피 머신",
   price: 500000,
-  imageUrl: "http://localhost:3001/images/coffee_self_service.png",
+  imageUrl: "http://localhost:3002/images/coffee_self_service.png",
   productOptions: [
     {
       id: 5,
@@ -160,7 +160,7 @@ const productOption4 = {
   id: 4,
   name: "우유 거품기",
   price: 20000,
-  imageUrl: "http://localhost:3001/images/cooking_milk_foamer.png",
+  imageUrl: "http://localhost:3002/images/cooking_milk_foamer.png",
   productOptions: [
     {
       id: 7,
@@ -193,7 +193,7 @@ const productOption5 = {
   id: 5,
   name: "우유용 컵",
   price: 10000,
-  imageUrl: "http://localhost:3001/images/drink_cafe_milk_jag.png",
+  imageUrl: "http://localhost:3002/images/drink_cafe_milk_jag.png",
   productOptions: [
     {
       id: 10,
@@ -226,7 +226,7 @@ const productOption6 = {
   id: 6,
   name: "그렙 커피",
   price: 3000,
-  imageUrl: "http://localhost:3001/images/drink_petbottle_coffee.png",
+  imageUrl: "http://localhost:3002/images/drink_petbottle_coffee.png",
   productOptions: [
     {
       id: 13,
@@ -251,7 +251,7 @@ const productOption7 = {
   id: 7,
   name: "에스프레소 메이커",
   price: 50000,
-  imageUrl: "http://localhost:3001/images/espresso_maker.png",
+  imageUrl: "http://localhost:3002/images/espresso_maker.png",
   productOptions: [
     { id: 71, name: "기본형", price: 0, stock: 5 },
     { id: 72, name: "한정판", price: 100000, stock: 5 },
@@ -262,7 +262,7 @@ const productOption8 = {
   id: 8,
   name: "냉동 샌드위치",
   price: 10000,
-  imageUrl: "http://localhost:3001/images/food_sandwitch.png",
+  imageUrl: "http://localhost:3002/images/food_sandwitch.png",
   productOptions: [
     {
       id: 16,
@@ -287,7 +287,7 @@ const productOption9 = {
   id: 9,
   name: "티 메이커",
   price: 35000,
-  imageUrl: "http://localhost:3001/images/press_tea_maker.png",
+  imageUrl: "http://localhost:3002/images/press_tea_maker.png",
   productOptions: [
     {
       id: 18,
@@ -320,7 +320,7 @@ const productOption10 = {
   id: 10,
   name: "각설탕 묶음",
   price: 500,
-  imageUrl: "http://localhost:3001/images/sugar_kakuzatou.png",
+  imageUrl: "http://localhost:3002/images/sugar_kakuzatou.png",
   productOptions: [
     {
       id: 21,
@@ -353,7 +353,7 @@ const productOption11 = {
   id: 11,
   name: "커피 시럽",
   price: 500,
-  imageUrl: "http://localhost:3001/images/sweets_milk_cream.png",
+  imageUrl: "http://localhost:3002/images/sweets_milk_cream.png",
   productOptions: [
     { id: 111, name: "5개 묶음", price: 0, stock: 500 },
     { id: 112, name: "100개 묶음", price: 9000, stock: 888 },
@@ -364,7 +364,7 @@ const productOption12 = {
   id: 12,
   name: "에스프레소 머신",
   price: 300000,
-  imageUrl: "http://localhost:3001/images/espresso_maker_2.png",
+  imageUrl: "http://localhost:3002/images/espresso_maker_2.png",
   productOptions: [
     {
       id: 15,

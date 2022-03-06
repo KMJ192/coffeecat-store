@@ -8,7 +8,7 @@ import CartContainer from './container/CartContainer';
 
 import '../static/style.css';
 
-useGlobalUrl('http://localhost:3001');
+useGlobalUrl('http://localhost:3002');
 
 function App() {
   return useRouter(MainPage, NotFound, [

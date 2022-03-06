@@ -20,13 +20,6 @@ const Router = (function () {
 
     for (const component of components) {
       const { exact, path, element, queryString } = component;
-      if (
-        (exact === true && pathname === path) ||
-        (!exact && pathname.indexOf(path) >= 0)
-      ) {
-        return element();
-      }
-
       if (queryString) {
         const nowPath = pathname.split('/');
         const objPath = path.split('/');
@@ -44,6 +37,13 @@ const Router = (function () {
           }
           return element();
         }
+      }
+
+      if (
+        (exact === true && pathname === path) ||
+        (!exact && pathname.indexOf(path) >= 0)
+      ) {
+        return element();
       }
     }
 
