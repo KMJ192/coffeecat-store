@@ -47,6 +47,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/classnames": "^2.3.1"
+    "classnames": "^2.3.1"
   }
 }
